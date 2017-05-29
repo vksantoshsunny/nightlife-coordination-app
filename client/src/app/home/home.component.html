@@ -1,0 +1,44 @@
+<div class="container">
+  <h1>
+    Nightlife Coordination App
+    <!-- <button class="btn btn-link btn-sm float-right" type="button" (click)="onLogout()">Logout</button> -->
+  </h1>
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+      <div class="col-sm-8 col-md-9 mt-3">
+        <input type="text" class="form-control" formControlName="query" placeholder="Your location (ex. San Francisco)">
+      </div>
+      <div class="col-sm-4 col-md-3 mt-3 text-right">
+        <span class="loader" *ngIf="loading"></span>
+        <button class="btn btn-primary" type="submit" [disabled]="!searchForm.valid || loading">Search</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="card-columns">
+      <div class="card mb-3" *ngFor="let bar of bars; let i = index">
+        <img class="card-img-top bar-img" [src]="bar.image_url" alt="{{ bar.name }}" *ngIf="bar.image_url">
+        <div class="card-block">
+          <h4 class="card-title">{{ bar.name }}</h4>
+          <p class="card-text bar-address">{{ bar.location.display_address.join("\n") }}</p>
+        </div>
+        <div class="card-footer clearfix">
+          <span class="text-muted">
+            {{ barsData && barsData[bar.id] ? barsData[bar.id] + ' going' : '' }}
+          </span>
+          <div class="btn-group float-right">
+            <a *ngIf="!isAuthenticated()" routerLink="/login" class="btn btn-outline-success btn-sm">Going</a>
+            <button *ngIf="isAuthenticated()" class="btn btn-sm" type="button" (click)="toggleGoing(bar.id)" [ngClass]="{'btn-success': goingInBar(bar.id), 'btn-outline-success': !goingInBar(bar.id)}">Going</button>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<footer>
+  <div class="container">
+    <hr>
+    <small class="text-muted">Nightlife Coordination App // Uses <a href="https://www.yelp.com/developers/documentation/v3" target="_blank">Yelp Fusion API</a>
+    </small>
+  </div>
+</footer>
+<router-outlet></router-outlet>

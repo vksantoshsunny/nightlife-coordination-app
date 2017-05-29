@@ -1,0 +1,42 @@
+.bar-row {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.bar-img {
+  max-width: 100%;
+}
+
+.bar-address {
+  white-space: pre-wrap;
+}
+
+.loader {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url(/assets/loader.gif) center no-repeat;
+  background-size: 25px;
+}
+
+@media (min-width: 576px) {
+  .card-columns {
+      -webkit-column-count: 1;
+      column-count: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-columns {
+      -webkit-column-count: 2;
+      column-count: 2;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-columns {
+      -webkit-column-count: 3;
+      column-count: 3;
+  }
+}
